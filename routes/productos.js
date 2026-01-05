@@ -8,7 +8,7 @@ const router = express.Router();
 ========================= */
 router.post("/", async (req, res) => {
   try {
-    const { listadoId, nombre, cantidad, precio, stockEst } = req.body;
+    const { listadoId, nombre, cantidad, precio, stockEst, descripcion } = req.body;
 
     if (!listadoId || !nombre) {
       return res.status(400).json({ error: "Datos incompletos" });
@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
       cantidad: Number(cantidad) || 0,
       precio: Number(precio) || 0,
       stockEst: Number(stockEst) || 0,
+      descripcion,
     });
 
     const guardado = await producto.save();
@@ -72,7 +73,8 @@ router.get("/:id", async (req, res) => {
 ========================= */
 router.put("/:id", async (req, res) => {
   try {
-    const { nombre, cantidad, precio, stockEst } = req.body;
+    const { nombre, cantidad, precio, stockEst, descripcion } = req.body;
+
 
     const update = {};
 
@@ -80,6 +82,7 @@ router.put("/:id", async (req, res) => {
     if (cantidad !== undefined) update.cantidad = Math.max(0, Number(cantidad));
     if (precio !== undefined) update.precio = Number(precio);
     if (stockEst !== undefined) update.stockEst = Number(stockEst);
+    if (descripcion !== undefined) update.descripcion = descripcion;
 
     const actualizado = await Producto.findByIdAndUpdate(
       req.params.id,
