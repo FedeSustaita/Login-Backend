@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const Usuarios = new Usuario(req.body);
+        const { username, password, empresa } = req.body;
+        const Usuarios = new Usuario({ username, password, empresa });
         const guardado = await Usuarios.save();
         res.status(201).json(guardado);
     } catch (err) {
