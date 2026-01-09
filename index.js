@@ -8,6 +8,7 @@ import morgan from "morgan";
 import productosRoutes from "./routes/productos.js";
 import usuariosRoutes from "./routes/usuarios.js";
 import movimientosRoutes from "./routes/movimientos.js";
+import variantesRoutes from "./routes/variantes.js";
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ app.get("/", (req, res) => res.send("Servidor corriendo"));
 app.use("/productos", productosRoutes);
 app.use("/usuarios", usuariosRoutes);
 app.use("/movimientos", movimientosRoutes);
+app.use("/variantes", variantesRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => console.log(`Servidor escuchando en http://localhost:${PORT}`));
